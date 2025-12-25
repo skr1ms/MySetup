@@ -1,0 +1,41 @@
+{ pkgs, ... }:
+
+{
+  fonts = {
+    enableDefaultPackages = true;
+
+    packages = with pkgs; [
+      jetbrains-mono
+      nerd-fonts.jetbrains-mono
+      nerd-fonts.caskaydia-cove
+      nerd-fonts.fira-code
+      liberation_ttf
+      corefonts
+      noto-fonts
+      noto-fonts-cjk-sans
+      noto-fonts-cjk-serif
+      noto-fonts-emoji-blob-bin
+      noto-fonts-color-emoji
+      google-fonts
+      cascadia-code
+      material-design-icons
+      material-symbols
+      nerd-fonts.symbols-only
+      papirus-icon-theme
+    ];
+
+    fontconfig = {
+      defaultFonts = {
+        serif = [ "Liberation Serif" "Times New Roman" ];
+        sansSerif = [ "Liberation Sans" ];
+        monospace = [
+          "JetBrains Mono"
+          "JetBrainsMono Nerd Font"
+          "Cascadia Code"
+          "Liberation Mono"
+          "Courier New"
+        ];
+      };
+    };
+  };
+}

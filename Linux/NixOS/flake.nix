@@ -1,0 +1,76 @@
+{
+  description = "NixOS + Caelestia-dots + meowrch themes + Flatpak + Snap";
+
+  inputs = {
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+
+    home-manager = {
+      url = "github:nix-community/home-manager";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    caelestia-shell = {
+      url = "github:caelestia-dots/shell";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    caelestia-cli = {
+      url = "github:caelestia-dots/cli";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    quickshell = {
+      url = "github:outfoxxed/quickshell";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    antigravity = {
+      url = "github:jacopone/antigravity-nix";
+    };
+
+    nix-snapd = {
+      url = "github:nix-community/nix-snapd";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    neovim-nightly-overlay = {
+      url = "github:nix-community/neovim-nightly-overlay";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+  };
+
+  outputs = { self, nixpkgs, home-manager, nix-snapd, ... }@inputs:
+  let
+    system = "x86_64-linux";
+  in {
+    nixosConfigurations.NixOS = nixpkgs.lib.nixosSystem {
+      inherit system;
+      specialArgs = { inherit inputs; };
+
+      modules = [
+        ./configuration.nix
+
+        ({ ... }: {
+          nixpkgs.overlays = [ inputs.antigravity.overlays.default ];
+        })
+
+        inputs.nix-snapd.nixosModules.default
+
+        home-manager.nixosModules.home-manager
+        {
+          home-manager = {
+            useGlobalPkgs = true;
+            useUserPackages = true;
+            users.takuya = import ./home/home.nix;
+            extraSpecialArgs = { inherit inputs system; };
+          };
+        }
+
+        ({ ... }: {
+          services.flatpak.enable = true;   
+          services.snap.enable = true;      
+        })
+      ];
+    };
+  };
+}

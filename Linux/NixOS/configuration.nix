@@ -1,0 +1,38 @@
+{ config, lib, pkgs, inputs, system, ... }:
+
+{
+  imports = [
+    ./hardware-configuration.nix
+    
+    # System
+    ./system/boot.nix
+    ./system/locale.nix
+    ./system/networking.nix
+    ./system/security.nix
+    ./system/power.nix
+    ./system/hardware.nix
+    ./system/nix.nix
+    
+    # Services
+    ./services/display.nix
+    ./services/databases.nix
+    ./services/observability.nix
+    ./services/virtualization.nix
+    ./services/system-services.nix
+    
+    # Programs
+    ./programs/desktop.nix
+    ./programs/gaming.nix
+    ./programs/shell.nix
+    ./programs/development.nix
+    ./programs/system-tools.nix
+    
+    # Packages & Users
+    ./packages/system-packages.nix
+    ./packages/dev-tools.nix
+    ./packages/fonts.nix
+    ./users/takuya.nix
+  ];
+
+  system.stateVersion = "25.11";
+}

@@ -1,0 +1,83 @@
+{ pkgs, ... }:
+
+{
+  home.packages = with pkgs; [
+    # Audio & Video
+    cava
+    app2unit
+    aubio
+    
+    # Desktop utilities
+    material-symbols
+    swappy
+    libqalculate
+    amnezia-vpn
+    
+    # Wayland tools
+    xdg-desktop-portal-hyprland
+    xdg-desktop-portal-gtk
+    hyprpicker
+    wl-clipboard
+    
+    # Office & Communication
+    libreoffice-qt6-fresh
+    onlyoffice-desktopeditors
+    spotify
+    telegram-desktop
+    
+    # Audio control
+    pwvucontrol
+    vencord
+    vesktop
+    
+    # Terminal & Shell
+    tmux
+    foot
+    starship
+    
+    # Databases
+    dbeaver-bin
+    jetbrains.datagrip
+    pgadmin4-desktopmode
+    
+    # API tools
+    yaak
+    insomnia
+    warp-terminal
+    
+    # Development
+    vscode
+    code-cursor
+    flutter
+    android-studio-full
+    scrcpy
+    qtcreator
+    
+    # Screenshot & Screen capture
+    grim
+    slurp
+    
+    # Containers
+    podman-desktop
+    docker-compose
+    
+    # System utilities
+    wtype
+    pamixer
+    pavucontrol
+    playerctl
+    
+    # Browsers
+    firefox
+    google-chrome
+    
+    # Other tools
+    fastfetch
+    bulky
+    qalculate-gtk
+    hyprlock
+    hypridle
+    hyprpaper
+    uwsm
+  ];
+}
