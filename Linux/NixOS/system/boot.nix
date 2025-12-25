@@ -39,7 +39,7 @@ in
   system.activationScripts.copyGrubTheme = ''
     if [ -d "${grubThemeSource}" ]; then
       mkdir -p /boot/grub/themes
-      ${pkgs.rsync}/bin/rsync -av --delete "${grubThemeSource}/" /boot/grub/themes/grub-theme/
+      ${pkgs.rsync}/bin/rsync -aq --delete "${grubThemeSource}/" /boot/grub/themes/grub-theme/
     fi
   '';
 }
