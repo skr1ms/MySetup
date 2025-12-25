@@ -15,6 +15,7 @@ function confirm-overwrite
             echo "Skipping $target"
             return 1
         end
+        echo "Removing old $target..."
         rm -rf $target
     end
 
@@ -79,10 +80,15 @@ if confirm-overwrite $cfg/btop
     cp -r $src/btop $cfg/btop
 end
 
-# Nvim
 if confirm-overwrite $cfg/nvim
+    echo "Cleaning all Neovim data..."
+    rm -rf ~/.local/share/nvim
+    rm -rf ~/.local/state/nvim
+    rm -rf ~/.cache/nvim
+    
     mkdir -p $cfg
     cp -r $src/nvim $cfg/nvim
+    echo "Neovim config installed. Run 'nvim' to download plugins."
 end
 
 # Make Hypr scripts executable
